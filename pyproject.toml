@@ -1,0 +1,70 @@
+[project]
+name = "whodunit"
+version = "20221227"
+description = "Add meaningful author attribution and other insights to your Git repository"
+maintainers = [{name="Suvayu Ali"}]
+urls = {repository="https://github.com/suvayu/whodunit"}
+keywords = ["version control", "git", "authorship", "attribution"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Software Development :: Version Control :: Git",
+    "Topic :: Utilities",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+]
+
+dependencies = [
+    "piccolo[sqlite]",
+    "sh",
+]
+
+[project.optional-dependencies]
+testing = [
+    "black",
+    "coverage[toml]",
+    "flake8",
+    "mypy",
+    "pytest",
+]
+
+[build-system]
+requires = ["setuptools>=42", "wheel" ]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+addopts = "-ra -q"
+
+[tool.mypy]
+ignore_missing_imports = true
+files = "whodunit"
+
+[tool.black]
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.github
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.vscode
+  | _build
+  | build
+  | dist
+  | .*\.egg-info
+
+  # directories without python source files
+  | tests/data
+  | tmp
+  | htmlcov
+)/
+'''
+
+[tool.pyright]
+venvPath = "venv"
+venv = "whodunit"
